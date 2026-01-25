@@ -22,6 +22,20 @@ O **ephemeral volume** o emptyDir que são criado e apos a destruicao do pod o e
 
 O **persistent volume** sao volumes que são criados e que não sao destruido caso pod seja destruido, sao persistidos, sao mantidos os dados mesmo com destruicao do pod.
 
+Tipos de volumes:
+
+1) Volumes enfemeros
+    - emptyDir
+    - downwardAPI
+    - configMap
+2) Volumes persistente
+    - nfs
+    - iscsi
+    - fc (fibre channel)
+    - hostPath
+    - local
+
+[Documentação sobre volumes no Kubernetes](https://kubernetes.io/docs/concepts/storage/volumes/)
 
 ## StorageClass
 O StorageClass é um objeto do Kubernetes que descreve e define diferentes classes de armazenamento disponíveis no cluster. Quando um usuário ou aplicação solicita a criação de um **PersistentVolumeClaim**(PVC), o Kubernetes utiliza o StorageClass para criar automaticamente um **PersistentVolume**(PV), evitando a necessidade de criação manual do volume, seguindo as regras e parâmetros definidos nesse StorageClass.
@@ -56,19 +70,23 @@ k get storageClas # Ver o storageClass criado chamado giropops
 ```
 
 ### PersistentVolume PV
-O PersistentVolume representa o volume fisico disponivel no cluster. Pode ser um disco rigido em um node do cluster, um dispositivo de armazenamento en rede (NAS), ou um servico de armazenamento em nuvem.
+PersistentVolume (PV) é um recurso de armazenamento disponível no cluster Kubernetes, provisionado por um administrador ou dinamicamente por meio de Storage Classes.
+Assim como um Node, o PV é um recurso do cluster e possui um ciclo de vida independente de qualquer Pod que o utilize.
+O objeto PV encapsula os detalhes da implementação do armazenamento, que pode ser um sistema NFS, iSCSI ou um serviço de armazenamento de um provedor de nuvem. Dessa forma, esses detalhes ficam abstraídos das aplicações, permitindo que os Pods solicitem o uso do armazenamento por meio de um PersistentVolumeClaim (PVC), sem a necessidade de configurar diretamente o tipo de armazenamento utilizado.
 
-No kubernetes temos dois tipos populares de PVs:
+O persistentvolume são implementados como plugins. O kubernetes suporta os seguintes plugins de PersistentVolume:
+- hostPath
+- local
+- nfs
+- iscsi
+- fc
+- csi
+1. Depresiado mais ainda disponivel
+- awsElasticBlockStore
+- azureDisk
+- azureFile
 
-1. Armazenamento Local
-   - HostPath
-   - emptyDir
-2. Armazenamento em Rede
-   - NFS
-   - ISCSI
-   - Ceph RBD
-   - CephFS
-   - Servicos de armazenamento em nuvem
+[Documentação sobre persistentvolume no Kubernetes](https://kubernetes.io/docs/concepts/storage/persistent-volumes/)
 
 ### Criando um PersistentVolume PV
 Cria um arquivo chamado *pv.yaml*
