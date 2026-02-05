@@ -21,8 +21,10 @@ func main() {
 	duration1 := time.Since(start)
 	// Medir versão eficiente
 	start = time.Now()
-	strings.Join(os.Args[1:], " ")
+	result2 := strings.Join(os.Args[1:], " ")
 	duration2 := time.Since(start)
+
+	_, _ = result1, result2
 
 	fmt.Printf("Versão ineficiente: %v\n", duration1)
 	fmt.Printf("Versão eficiente: %v\n", duration2)

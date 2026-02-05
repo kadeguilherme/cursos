@@ -6,15 +6,15 @@ Este diretório contém os exercícios do Capítulo 1 do livro "A Linguagem de P
 
 ```
 chapter-1/
+├── go.mod                 # Módulo Go
 ├── README.md              # Este arquivo
-└── echo/                  # Exercícios relacionados ao comando echo
-    ├── ex1_1/             # Exercício 1.1 - Exibir nome do programa
-    │   └── main.go
-    ├── ex1_2/             # Exercício 1.2 - Exibir argumentos com índice
-    │   └── main.go
-    └── ex1_3/             # Exercício 1.3 - Comparar performance
-        ├── main.go
-        └── echo_test.go   # Testes unitários e benchmarks
+├── ex1_1/                 # Exercício 1.1 - Exibir nome do programa
+│   └── main.go
+├── ex1_2/                 # Exercício 1.2 - Exibir argumentos com índice
+│   └── main.go
+└── ex1_3/                 # Exercício 1.3 - Comparar performance
+    ├── main.go
+    └── echo_test.go       # Testes unitários e benchmarks
 ```
 
 ## Executando os Exercícios
@@ -23,13 +23,19 @@ Para executar cada exercício:
 
 ```bash
 # Exercício 1.1
-cd echo/ex1_1 && go run main.go
+cd ex1_1 && go run main.go
 
 # Exercício 1.2
-cd echo/ex1_2 && go run main.go arg1 arg2 arg3
+cd ex1_2 && go run main.go arg1 arg2 arg3
 
 # Exercício 1.3
-cd echo/ex1_3 && go run main.go arg1 arg2 arg3
+cd ex1_3 && go run main.go arg1 arg2 arg3
+
+# Rodar testes do exercício 1.3
+cd ex1_3 && go test -v
+
+# Rodar benchmarks do exercício 1.3
+cd ex1_3 && go test -bench=.
 ```
 
 ## Descrição dos Exercícios
