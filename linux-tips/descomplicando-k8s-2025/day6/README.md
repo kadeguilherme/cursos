@@ -1,8 +1,6 @@
 # Descomplicando Kubernetes
 ## Day 06 — Volumes
 
----
-
 ## Conteudo da Aula
 Entender como o k8s lidar com **Persistencia de dados**.
 
@@ -11,7 +9,6 @@ Entender como o k8s lidar com **Persistencia de dados**.
   - PV (persistente volume) 
   - PVC (persistente volume claim)
 
----
 ## O que são volumes ?
 Um Volume no Kubernetes é uma abstração de armazenamento que pode ser usada pelos contêineres dentro de um Pod. Diferente do armazenamento padrão do contêiner (que é temporário e desaparece quando o contêiner é reiniciado), os Volumes no Kubernetes permitem persistir dados de forma mais confiável.
 Os volumes são divididos em 2 tipos:
@@ -46,7 +43,6 @@ O storageClass é definido por `provisionador` que é o responsavel por criar o 
 > Cada cloud provider possui seu próprio provisionador.
 > O provisionador padrão para volumes locais é:
 > **`kubernetes.io/no-provisioner`**
-
 
 > [!IMPORTANT]
 > Em volumes locais, o StorageClass com WaitForFirstConsumer garante que o PVC só seja vinculado a um PV após o schedule do Pod, assegurando que ambos estejam no mesmo node.
@@ -107,13 +103,11 @@ spec: # Especificações do nosso PV
     path: "/mnt/data" # Caminho do hostPath, do nosso nó, onde o PV será criado
   storageClassName: standard # Nome da classe de armazenamento que será utilizada
 ```
-----
+
 ```bash
 kubectl apply -f pv.yaml
 persistentvolume/meu-pv created
 ```
-
---- 
 
 ### PersistentVolumeClaim PVC
 O PVC reividica um PV para ser usado por um container, entao o kubernetes tenta associar automaticamente um PVC a um PV compativel garantindo o armazenamento seja alocado corretamente.
@@ -137,7 +131,7 @@ spec: # especificação do PVC
     matchLabels: # labels que serão utilizadas para selecionar o PV
       storage: local # label que será utilizada para selecionar o PV
 ```
----
+
 ```bash
 kubectl apply -f pvc.yaml
 persistentvolumeclaim/meu-pvc created
@@ -165,7 +159,7 @@ spec:
     persistentVolumeClaim:
       claimName: meu-pvc
 ```
----
+
 ```bash
 kubectl apply -f pod.yaml
 pod/nginx-pod created
@@ -177,5 +171,3 @@ Agora podemos ver nosso PVC foi vinculado ao PV.
 kubectl get pvc
 ```
 
-## Final do Day-6
-Durante o Day-6 você aprendeu tudo sobre volumes no Kubernetes! Durante o Day-6 você aprender o que é um StorageClass, um PV e um PVC, e mais do que isso, você aprendeu tudo isso de forma prática!
