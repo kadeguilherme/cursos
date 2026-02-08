@@ -95,6 +95,32 @@ O Service é um objeto do Kubernetes que funciona como uma camada de abstração
 | ExternalName  | Mapeia o serviço para um nome DNS externo                                  |
 | Headless      | Não atribui IP ao serviço, usado para descoberta direta de Pods           |
 
+
+### Port definitions
+Com o Port definitions podemos no  targetPort usar o nome de uma porta do container, e o Kubernetes converte esse nome automaticamente para o número da porta.
+
+```yaml
+# Pod com porta nomeada
+apiVersion: v1
+kind: Pod
+spec:
+  containers:
+    - name: meu-app
+      ports:
+        - containerPort: 80
+          name: http-web-svc
+
+# Service referenciando a porta pelo nome
+apiVersion: v1
+kind: Service
+spec:
+  ports:
+    - port: 80
+      targetPort: http-web-svc  # Referência ao nome da porta do Pod
+```
+
+Essa abordagem permite que o targetPort do Service seja vinculado à porta nomeada do Pod, facilitando a manutenção e tornando a configuração mais legível.
+
 ### Criando Services
 
 #### ClusterIp
@@ -205,11 +231,18 @@ kubectl describe service meu-service
 ## Verificando os Endpoints
 Os Endpoints são uma parte importante dos Services, pois eles são responsáveis por manter o mapeamento entre o Service e os Pods que ele está expondo. Quando um Service é criado, o Kubernetes automaticamente cria um objeto Endpoints que contém os IPs dos Pods selecionados.
 
+> **⚠️ Importante**: O objeto `Endpoints` está **deprecated** a evolucao dele e o `EndpointSlices`.
+
 ```bash
+# Verificando Endpoints (legado)
 kubectl get endpoints -A
 kubectl get endpoints meu-service
-# describe endpoints
 kubectl describe endpoints meu-service
+
+# Verificando EndpointSlices (recomendado)
+kubectl get endpointslices -A
+kubectl get endpointslices meu-service
+kubectl describe endpointslices meu-service
 ```
 
 ## Removendo um Service
