@@ -7,3 +7,18 @@ Deployments são a forma recomendada de gerenciar ReplicaSets, pois eles fornece
 
 deployments -> ReplicaSets -> Pods
 
+´´´bash
+k get replicasets
+
+´´´
+### O que é um DaemonSet?
+Um DaemonSet é um recurso do Kubernetes que garante que uma cópia de um Pod seja executada em todos (ou alguns) nós do cluster. Ele é útil para executar serviços que precisam ester presentes em todos os nodes.
+
+
+Alguns exemeplos de uso de DaemonSets:
+- Coletar logs de todos os nós do cluster.
+- Executar agentes de monitoramento como o Prometheus Node Exporter ou o Fluentd.
+- Execucão de um proxy de redes em todos os nós do cluster, como o Calico ou o Weave Net.
+- execução de agentes de segurança, como o Falco ou o Sysdig.
+
+
