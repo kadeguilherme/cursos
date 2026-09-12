@@ -21,4 +21,16 @@ Alguns exemeplos de uso de DaemonSets:
 - Execucão de um proxy de redes em todos os nós do cluster, como o Calico ou o Weave Net.
 - execução de agentes de segurança, como o Falco ou o Sysdig.
 
+### Criando um DaemonSets
+``` bash
+kubectl apply -f ./node-exporter-daemonset.k8s.yaml
+```
+
+### Probes
+As Probes são mecanismos de verificação de saúde dos Pods no Kubernetes. Elas permitem que o Kubernetes monitore o estado dos contêineres e tome ações apropriadas com base nos resultados dessas verificações.
+Existem três tipos principais de Probes:
+1. **Liveness Probe**: Verifica se o contêiner está em execução.
+2. **Readiness Probe**: Verifica se o contêiner está pronto para receber tráfego.
+3. **Startup Probe**: Verifica se o contêiner iniciou corretamente.
+
 
