@@ -32,5 +32,24 @@ Existem três tipos principais de Probes:
 1. **Liveness Probe**: Verifica se o contêiner está em execução.
 2. **Readiness Probe**: Verifica se o contêiner está pronto para receber tráfego.
 3. **Startup Probe**: Verifica se o contêiner iniciou corretamente.
+ 
+#### Liveness Probe
+A Liveness Probe é usada para determinar se um contêiner está em execução. Se a Liveness Probe falhar, o Kubernetes reiniciará o contêiner. Isso é útil para detectar situações em que um contêiner está em um estado de falha e precisa ser reiniciado.
+Exemplo de configuração de Liveness Probe em um Pod:
+```bash
+kubectl apply -f nginx-liveness.k8s.yaml
+```
 
+### Readiness Probe
+A Readiness Probe é usada para determinar se um contêiner está pronto para receber tráfego de rede. Se a Readiness Probe falhar, o Kubernetes removerá o Pod do serviço de balanceamento de carga, evitando que ele receba solicitações até que esteja pronto novamente.
+Exemplo de configuração de Readiness Probe em um Pod:
+```bash
+kubectl apply -f nginx-readiness.k8s.yaml
+```
+### Startup Probe
+A Startup Probe é usada para determinar se um contêiner iniciou corretamente. Ela é útil para contêineres que podem demorar mais para iniciar do que o tempo limite padrão das Liveness e Readiness Probes. Se a Startup Probe falhar, o Kubernetes reiniciará o contêiner. Isso ajuda a evitar reinicializações prematuras de contêineres que estão apenas demorando para iniciar.
+Exemplo de configuração de Startup Probe em um Pod:
+```bash
+kubectl apply -f nginx-startup.k8s.yaml
+```
 
