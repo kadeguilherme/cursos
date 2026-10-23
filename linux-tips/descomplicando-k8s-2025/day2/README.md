@@ -1,4 +1,6 @@
 # Descomplicando Kubernetes - Day 2
+- Pods
+- Limites de Recursos
 
 ## O que é um Pod?
 Um Pod pode ter mais de um container. O Pod é a menor unidade do Kubernetes. Por exemplo, um sidecar (container auxiliar que roda junto com o container principal).
