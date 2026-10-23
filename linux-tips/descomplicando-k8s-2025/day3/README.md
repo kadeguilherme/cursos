@@ -1,4 +1,6 @@
 # Descomplicando Kubernetes - Day 3
+- Deployment
+- Estrategia de atualizacao de rollout
 
 ## O que é um Deployment?
 O Deployment é um recurso do Kubernetes que fornece atualizações declarativas para Pods e ReplicaSets. Ele permite que você descreva o estado desejado para seus Pods e o Kubernetes altera o estado real para o estado desejado de forma controlada.
@@ -66,7 +68,8 @@ spec:
               cpu: "500m"
           ports:
             - containerPort: 80
- ```
+
+```bash
 kubectl apply -f meu-deployment.k8s.yaml
 kubectl delete -f meu-deployment.k8s.yaml
 ```
