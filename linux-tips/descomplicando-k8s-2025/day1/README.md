@@ -1,4 +1,5 @@
 # Descomplicando Kubernetes - Day 1
+- Container
 
 ## O que é um container?
 Container é uma unidade leve e portável que empacota uma aplicação e suas dependências, executando em um ambiente isolado no sistema operacional. Esse isolamento é possível graças a duas tecnologias do kernel Linux:
