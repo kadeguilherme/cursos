@@ -1,4 +1,7 @@
 # Descomplicando Kubernetes - Day 4
+- Replicasets
+- Deamonsets
+- Probes
 
 ## Replicasets e Deamonsets
 ### O que é um ReplicaSet?
