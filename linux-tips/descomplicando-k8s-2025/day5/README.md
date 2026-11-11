@@ -21,10 +21,11 @@ link: https://kubernetes.io/docs/setup/production-environment/tools/
 ## Instalando o Kubernetes com kubeadm
 Esse guiar e para o kubernetes 1.37, que é a versão mais recente do Kubernetes.
 
-> [!Note]
-A instalacao do kubeadm e feita via binarios que use dynamic linking e assume que o sistema tem o glibc instalado.
-Isso e a razao de assume que maioria das distribuicoes linux (como Ubuntu, Debian, CentOS, Fedora, etc) tem o glibc instalado por padrao.)
-O alpine linux e uma excecao, pois ele usa musl libc, que e uma implementacao diferente da glibc. Por isso, o kubeadm nao funciona no alpine linux. O gcompat e uma biblioteca que fornece compatibilidade com glibc para o musl libc, permitindo que aplicativos que dependem de glibc sejam executados em sistemas baseados em musl libc, como o Alpine Linux. No entanto, o gcompat e uma solucao temporaria e nao e recomendada para ambientes de producao. A melhor abordagem e usar uma distribuicao linux que seja oficialmente suportada pelo Kubernetes.
+> [!IMPORTANT]
+> A instalacao do kubeadm e feita via binarios que use dynamic linking e assume que o sistema tem o glibc instalado.
+Isso e a razao de assume que maioria das distribuicoes linux (como Ubuntu, Debian, CentOS, Fedora, etc) tem o glibc instalado por padrao.).
+
+> O alpine linux e uma excecao, pois ele usa musl libc, que e uma implementacao diferente da glibc. Por isso, o kubeadm nao funciona no alpine linux. O gcompat e uma biblioteca que fornece compatibilidade com glibc para o musl libc, permitindo que aplicativos que dependem de glibc sejam executados em sistemas baseados em musl libc, como o Alpine Linux. No entanto, o gcompat e uma solucao temporaria e nao e recomendada para ambientes de producao. A melhor abordagem e usar uma distribuicao linux que seja oficialmente suportada pelo Kubernetes.
 
 ### Verificando seu versao do OS 
 O cluster k8s depende de software que sao features do kernel, mas nao se limita container runtime, kubelet e container Network Interface (CNI)
