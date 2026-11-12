@@ -57,4 +57,16 @@ ip route add <IP_ADDRESS> via <GATEWAY_IP> dev <INTERFACE>
 ip route
 ```
 
+### Portas requeridas para o Kubernetes
+Essas portas devem estar abertas para que o cluster Kubernetes funcione corretamente. Se estiver usando um firewall, certifique-se de permitir o tráfego nessas portas.
+
+### Control Plane
+
+| Protoloco | Direcao | Portas | Finalidade | Usado por |
+| :--- | :--- | :--- | :--- | :--- |
+| TCP | Inbound | 6443 | Kubernetes API Server | Todos |
+| TCP | Inbound | 2379-2380 | etcd server client API | kube-apiserver, etcd |
+| TCP | Inbound | 10250 | Kubelet APi | local, control plane |
+| TCP | Inbound | 10259 | kube-scheduler | local |
+| TCP | Inbound | 10257 | kube-controller-manager | local |
 
