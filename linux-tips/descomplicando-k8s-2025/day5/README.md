@@ -60,13 +60,23 @@ ip route
 ### Portas requeridas para o Kubernetes
 Essas portas devem estar abertas para que o cluster Kubernetes funcione corretamente. Se estiver usando um firewall, certifique-se de permitir o tráfego nessas portas.
 
-### Control Plane
-
-| Protoloco | Direcao | Portas | Finalidade | Usado por |
+#### Control Plane
+| Protocolo | Direcao | Portas | Finalidade | Usado por |
 | :--- | :--- | :--- | :--- | :--- |
 | TCP | Inbound | 6443 | Kubernetes API Server | Todos |
 | TCP | Inbound | 2379-2380 | etcd server client API | kube-apiserver, etcd |
 | TCP | Inbound | 10250 | Kubelet APi | local, control plane |
 | TCP | Inbound | 10259 | kube-scheduler | local |
 | TCP | Inbound | 10257 | kube-controller-manager | local |
+
+> [!Note]
+> As portas do etcd pode mudar se voce estiver usando um cluster etcd externo ou portas customizadas.
+
+#### Worker node(s)
+| Protocolo | Direcao | Portas | Finalidade | Usado por |
+| :--- | :--- | :--- | :--- | :--- |
+| TCP | Inbound | 10250 | Kubelet API | local, control plane |
+| TCP | Inbound | 10256 | kube-proxy | local, Load balancers |
+| TCP | Inbound | 30000-32767 | NodePort Services | Todos |
+| UDP | Inbound |  30000-32767 | NodePort Services | Todos |
 
