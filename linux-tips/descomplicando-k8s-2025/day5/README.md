@@ -80,3 +80,37 @@ Essas portas devem estar abertas para que o cluster Kubernetes funcione corretam
 | TCP | Inbound | 30000-32767 | NodePort Services | Todos |
 | UDP | Inbound |  30000-32767 | NodePort Services | Todos |
 
+Para verificar se as portas estao abertas com netcat, voce pode usar o comando abaixo:
+
+```bash
+nc 127.0.0.1 6443 -zv -w 2
+```
+### Swap
+Por padrao, o Kubelet falha ao iniciar, se tiver swap no node e preciso desativar o swap. Para desativar o swap, voce pode usar o comando abaixo:
+
+```bash
+ vim /etc/fstab
+```
+Comente a linha que contem swap, ou remova a linha salve e saia do editor
+
+
+### Container Runtime
+Para rodar pods no Kubernetes, voce precisa de um container runtime.
+Por padrao, kubernetes usa o Container Runtime Interface (CRI) para se comunicar com o container runtime. O CRI e uma interface padrao que permite que o kubelet se comunique com diferentes container runtimes.
+O CRI suporta varios container runtimes, como:
+- containerd: E um container runtime leve e de alto desempenho, que e usado por padrao pelo Kubernetes. Ele e recomendado para producao.
+- CRI-O: E um container runtime leve e de alto desempenho, que e usado por padrao pelo Kubernetes. Ele e recomendado para producao.
+- Docker Engine(cri-dockerd): E um container runtime popular, mas nao e recomendado para producao, pois ele nao e mantido pelo Kubernetes. O Docker usa o dockershim, que foi removido do Kubernetes a partir da versao 1.24. Para usar o Docker como container runtime, voce precisa instalar o cri-dockerd, que e um projeto de comunidade que fornece suporte ao Docker no Kubernetes.
+
+### Instalando kubeadm, kubelet e kubectl
+Para instalar o kubeadm, kubelet e kubectl, voce pode usar o comando abaixo:
+```bash
+# This overwrites any existing configuration in /etc/apt/sources.list.d/kubernetes.list
+echo 'deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] https://pkgs.k8s.io/core:/stable:/v1.37/deb/ /' | sudo tee /etc/apt/sources.list.d/kubernetes.list
+# Update the package list and install kubelet, kubeadm and kubectl
+sudo apt-get update
+sudo apt-get install -y kubelet kubeadm kubectl
+sudo apt-mark hold kubelet kubeadm kubectl
+# Enable and start the kubelet service
+sudo systemctl enable --now kubelet
+```
