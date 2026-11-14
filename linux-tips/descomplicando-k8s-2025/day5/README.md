@@ -8,8 +8,6 @@
 
 ## Getting Started
 
-> [!Note]
-
 Ha varios metodos e ferramentas para instalar o Kubernetes. Por exemplo: 
 - kubeadm
 - Cluster API: Uma ferramenta que permite criar clusters Kubernetes em diferentes provedores de nuvem e ambientes on-premises.
