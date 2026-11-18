@@ -1,6 +1,13 @@
+
+
 # Instalando cluster Kubernetes com 3 nodes no Ubuntu 22.04.
 - 1 control plane node
 - 2 worker nodes
+
+## Passo a passo
+1. Pré-requisitos e instalação do kubeadm, kubelet e kubectl (este arquivo)
+2. [Container runtime](container-runtime.md)
+3. [Criando o cluster com kubeadm](criando-cluster.md)
 
 ## Formas de instalar o cluster Kubernetes
 - kubeadm: E a ferramenta oficial do Kubernetes para instalar clusters. É a forma mais recomendada e utilizada. E é a que vamos utilizar nesse tutorial.
