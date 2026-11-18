@@ -27,11 +27,15 @@ Isso e a razao de assume que maioria das distribuicoes linux (como Ubuntu, Debia
 > O alpine linux e uma excecao, pois ele usa musl libc, que e uma implementacao diferente da glibc. Por isso, o kubeadm nao funciona no alpine linux. O gcompat e uma biblioteca que fornece compatibilidade com glibc para o musl libc, permitindo que aplicativos que dependem de glibc sejam executados em sistemas baseados em musl libc, como o Alpine Linux. No entanto, o gcompat e uma solucao temporaria e nao e recomendada para ambientes de producao. A melhor abordagem e usar uma distribuicao linux que seja oficialmente suportada pelo Kubernetes.
 
 ### Verificando seu versao do OS 
-O cluster k8s depende de software que sao features do kernel, mas nao se limita container runtime, kubelet e container Network Interface (CNI)
-Para ajudar a verificar se o seu sistema operacional e compativel com o Kubernetes, voce pode usar o comando abaixo para verificar a versao kernel e suportado.
+O cluster k8s depende de features do kernel usadas por componentes como o container runtime, o kubelet e a Container Network Interface (CNI).
+Para verificar a versão do kernel:
 
 ```bash
-kubeadm init --ignore-preflight-errors=SystemVerification
+uname -r
+```
+O kubeadm valida o kernel automaticamente no preflight (checagem `SystemVerification`). Para rodar só essa etapa
+```bash
+sudo kubeadm init preflight
 ```
 ### Verificando MAC address e product_uuid sao unicos para o node
 
@@ -89,6 +93,8 @@ Por padrao, o Kubelet falha ao iniciar, se tiver swap no node e preciso desativa
 
 ```bash
  vim /etc/fstab
+# verificar: a linha Swap deve mostrar 0
+free -h
 ```
 Comente a linha que contem swap, ou remova a linha salve e saia do editor
 
