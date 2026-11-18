@@ -17,18 +17,23 @@ sysctl net.ipv4.ip_forward
 ### cgroup drivers
 No Linux, control groups (cgroups) sao usados para limitar e isolar o uso de recursos (CPU, memoria, disco, etc.) de um grupo de processos.
 Ha dois tipos de cgroup drivers:
-- cgroupfs
-- systemd
+- cgroupfs: O driver escreve direto no filesystem do cgroups.
+- systemd: O sustemd gerencia os cgroups.
+
 > ![Note]
 > O cgroup driver do kubelet e do container runtime devem ser iguais.
+
 #### systemd como cgroup driver
-Para usar o systemd como cgroup driver, voce precisa editar o ```kubeletconfiguration``` opcao ```cgroupDriver``` para ```systemd```.
+Use o `systemd` quando o init do sistema for o systemd ou o node usa o cgroup v2. Misturar os dois drives cria dois gerenciadores de cgroup no mesmo node e causa instabilidade.
+Para usar o `systemd` como cgroup driver, voce precisa editar o ```kubeletconfiguration``` opcao ```cgroupDriver``` para ```systemd```.
+
 ```bash
 apiVersion: kubelet.config.k8s.io/v1beta1
 kind: KubeletConfiguration
 ...
 cgroupDriver: systemd
 ```
+
 ### Verificando a configuracao kubelet
 - iniciar proxy server usando:
 ```bash
@@ -38,8 +43,10 @@ kubectl proxy
 ```bash
 curl -X GET http://127.0.0.1:8001/api/v1/nodes/<node-name>/proxy/configz | jq .
 ```
+
 ## Containerd
 Para instalar o [containerd](https://github.com/containerd/containerd/blob/main/docs/getting-started.md).
+
 ### Configurando o systemd cgroup driver
 Para usar o systemd como cgroup driver, voce precisa editar o arquivo de configuracao do containerd em ```/etc/containerd/config.toml```:
 Containerd version 1.x:
@@ -49,6 +56,7 @@ Containerd version 1.x:
   [plugins."io.containerd.grpc.v1.cri".containerd.runtimes.runc.options]
     SystemdCgroup = true
 ```
+
 Containerd version 2.x:
 ```toml
 [plugins.'io.containerd.cri.v1.runtime'.containerd.runtimes.runc]
