@@ -107,6 +107,8 @@ O CRI suporta varios container runtimes, como:
 - CRI-O: E um container runtime leve e de alto desempenho, que e usado por padrao pelo Kubernetes. Ele e recomendado para producao.
 - Docker Engine(cri-dockerd): E um container runtime popular, mas nao e recomendado para producao, pois ele nao e mantido pelo Kubernetes. O Docker usa o dockershim, que foi removido do Kubernetes a partir da versao 1.24. Para usar o Docker como container runtime, voce precisa instalar o cri-dockerd, que e um projeto de comunidade que fornece suporte ao Docker no Kubernetes.
 
+Para instalar e configurar o container runtime, veja [container-runtime.md](container-runtime.md).
+
 ### Instalando kubeadm, kubelet e kubectl
 Para instalar o kubeadm, kubelet e kubectl, voce pode usar o comando abaixo:
 ```bash
