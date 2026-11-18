@@ -1,27 +1,22 @@
-
-
-# Instalando cluster Kubernetes com 3 nodes no Ubuntu 22.04.
+# Resumo
+Essa doc e um guia para iniciar um cluster Kubernetes, que sera composto 3 nodes no Ubuntu 22.04.
 - 1 control plane node
 - 2 worker nodes
 
-## Passo a passo
-1. Pré-requisitos e instalação do kubeadm, kubelet e kubectl (este arquivo)
-2. [Container runtime](container-runtime.md)
-3. [Criando o cluster com kubeadm](criando-cluster.md)
+No decorrer da doc vai ser apresentado conceitos sobre ferramentas de instalacao do kubernetes, pre-requisitos e etc.
 
-## Formas de instalar o cluster Kubernetes
+## Ferramentas para criar um cluster Kubernetes
+### Ferramentas para ambiente locais
+- k3s: A CNCF e responsavel dele, empacotada em um único binário e com baixo consumo de recursos. Usada em produção, principalmente em edge, IoT e ambientes com pouco hardware.
+- minikube: Cria um cluster local na sua máquina, com os nodes rodando em containers ou VMs, dependendo do driver (Docker, KVM, VirtualBox etc.).
+
+### Ferramentas para ambiente de producao
 - kubeadm: E a ferramenta oficial do Kubernetes para instalar clusters. É a forma mais recomendada e utilizada. E é a que vamos utilizar nesse tutorial.
-- k3s e minikube: Ideal para ambientes de desenvolvimento e testes. Não é recomendada para produção.
-
-## Getting Started
-
-Ha varios metodos e ferramentas para instalar o Kubernetes. Por exemplo: 
-- kubeadm
 - Cluster API: Uma ferramenta que permite criar clusters Kubernetes em diferentes provedores de nuvem e ambientes on-premises.
 - kops: Uma ferramenta que permite criar clusters Kubernetes em diferentes provedores de nuvem e ambientes on-premises.
 - kubespray: Uma ferramenta que permite criar clusters Kubernetes em diferentes provedores de nuvem e ambientes on-premises.
 
-link: https://kubernetes.io/docs/setup/production-environment/tools/
+Fonte: [Doc oficial](https://kubernetes.io/docs/setup/production-environment/tools/)
 
 ## Instalando o Kubernetes com kubeadm
 Esse guiar e para o kubernetes 1.37, que é a versão mais recente do Kubernetes.
@@ -32,6 +27,11 @@ Isso e a razao de assume que maioria das distribuicoes linux (como Ubuntu, Debia
 
 > [!IMPORTANT]
 > O alpine linux e uma excecao, pois ele usa musl libc, que e uma implementacao diferente da glibc. Por isso, o kubeadm nao funciona no alpine linux. O gcompat e uma biblioteca que fornece compatibilidade com glibc para o musl libc, permitindo que aplicativos que dependem de glibc sejam executados em sistemas baseados em musl libc, como o Alpine Linux. No entanto, o gcompat e uma solucao temporaria e nao e recomendada para ambientes de producao. A melhor abordagem e usar uma distribuicao linux que seja oficialmente suportada pelo Kubernetes.
+
+## Sumario da doc
+1. Pré-requisitos e instalação do kubeadm, kubelet e kubectl
+2. [Container runtime](container-runtime.md)
+3. [Criando o cluster com kubeadm](criando-cluster.md)
 
 ### Verificando seu versao do OS 
 O cluster k8s depende de features do kernel usadas por componentes como o container runtime, o kubelet e a Container Network Interface (CNI).
