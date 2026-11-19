@@ -1,10 +1,17 @@
 # Container Runtime
+
 > [!Note]
 > Dockershim foi removido do Kubernetes a partir da versao 1.24.
 Voce precisa instalar o container runtime dentro de cada node do cluster. O container runtime e responsavel por executar os containers dentro dos pods.
-## Instalando e pre-requisitos da configuração
+
+## Sumario do conteudo:
+- [Pre-requisitos](#pre-requisitos)
+- [Containerd](#containerd)
+
+## Pre-requisitos 
 ### Configuracao Network
 O kernel do linux nao permite pacotes IPv4 seja roteados entre interfaces de rede, por padrao. Para habilitar o roteamento de pacotes IPv4 entre interfaces de rede, voce precisa habilitar o encaminhamento de pacotes IPv4 no kernel do linux. Para habilitar o encaminhamento de pacotes IPv4 no kernel do linux, voce pode usar o comando abaixo:
+
 ```bash
 cat <<EOF | sudo tee /etc/sysctl.d/k8s.conf
 net.ipv4.ip_forward = 1
@@ -14,6 +21,7 @@ sudo sysctl --system
 # verify the changes
 sysctl net.ipv4.ip_forward
 ```
+
 ### cgroup drivers
 No Linux, control groups (cgroups) sao usados para limitar e isolar o uso de recursos (CPU, memoria, disco, etc.) de um grupo de processos.
 Ha dois tipos de cgroup drivers:
@@ -35,6 +43,7 @@ cgroupDriver: systemd
 ```
 
 ### Verificando a configuracao kubelet
+
 - iniciar proxy server usando:
 ```bash
 kubectl proxy
@@ -71,5 +80,6 @@ sudo systemctl restart containerd
 ## CRI-O
 Para instalar o [CRI-O](https://github.com/cri-o/packaging/blod/main/README.md).
 CRI-O usa o systemd como cgroup driver por padrao.
+
 ## Docker Engine
 Para instalar o [Docker Enginei](https://docs.docker.com/engine/install/).
