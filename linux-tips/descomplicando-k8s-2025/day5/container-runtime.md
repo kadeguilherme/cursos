@@ -28,7 +28,7 @@ Ha dois tipos de cgroup drivers:
 - cgroupfs: O driver escreve direto no filesystem do cgroups.
 - systemd: O sustemd gerencia os cgroups.
 
-> ![Note]
+> [!Note]
 > O cgroup driver do kubelet e do container runtime devem ser iguais.
 
 #### systemd como cgroup driver
