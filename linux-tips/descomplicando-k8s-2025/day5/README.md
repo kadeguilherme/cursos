@@ -8,7 +8,7 @@ No decorrer da doc vai ser apresentado conceitos sobre ferramentas de instalacao
 ## Ferramentas para criar um cluster Kubernetes
 ### Ferramentas para ambiente locais
 - k3s: A CNCF e responsavel dele, empacotada em um único binário e com baixo consumo de recursos. Usada em produção, principalmente em edge, IoT e ambientes com pouco hardware.
-- minikube: Cria um cluster local na sua máquina, com os nodes rodando em containers ou VMs, dependendo do driver (Docker, KVM, VirtualBox etc.).
+- minikube: Cria um cluster local na sua máquina, com os nodes rodando em VMs, dependendo do driver (Docker, KVM, VirtualBox etc.).
 
 ### Ferramentas para ambiente de producao
 - kubeadm: E a ferramenta oficial do Kubernetes para instalar clusters. É a forma mais recomendada e utilizada. E é a que vamos utilizar nesse tutorial.
@@ -27,14 +27,14 @@ Fonte: [Doc oficial](https://kubernetes.io/docs/setup/production-environment/too
 ### Pré-requisitos
 
 > [!IMPORTANT]
-> A instalacao do kubeadm e feita via binarios que use dynamic linking e assume que o sistema tem o glibc instalado.
-Isso e a razao de assume que maioria das distribuicoes linux (como Ubuntu, Debian, CentOS, Fedora, etc) tem o glibc instalado por padrao.).
+> A instalacao do kubeadm e feita via binarios que usa o **dynamic linking** e assume que o sistema tem o **glibc instalado**.
+A maioria das distribuicoes linux (como Ubuntu, Debian, CentOS, Fedora, etc) tem o glibc instalado por padrao.).
 
 > [!IMPORTANT]
-> O alpine linux e uma excecao, pois ele usa musl libc, que e uma implementacao diferente da glibc. Por isso, o kubeadm nao funciona no alpine linux. O gcompat e uma biblioteca que fornece compatibilidade com glibc para o musl libc, permitindo que aplicativos que dependem de glibc sejam executados em sistemas baseados em musl libc, como o Alpine Linux. No entanto, o gcompat e uma solucao temporaria e nao e recomendada para ambientes de producao. A melhor abordagem e usar uma distribuicao linux que seja oficialmente suportada pelo Kubernetes.
+> O alpine linux é uma exceção, pois ele usa **musl libc**, que e uma implementação diferente da glibc. Por isso, o kubeadm nao funciona no alpine linux. O gcompat e uma biblioteca que fornece compatibilidade com glibc para o musl libc, permitindo que aplicativos que dependem de glibc sejam executados em sistemas baseados em musl libc, como o Alpine Linux. No entanto, o gcompat e uma solucao temporaria e nao e recomendada para ambientes de producao. A melhor abordagem e usar uma distribuicao linux que seja oficialmente suportada pelo Kubernetes.
 
 > [!NOTE]
-> Esse guiar e para o kubernetes 1.37.
+> Esse guiar e para o kubernetes **1.37**
 
 #### Verificando a versao do kernel
 Verifique a versão do kernel:
@@ -57,7 +57,7 @@ ifconfig -a
 cat /sys/class/dmi/id/product_uuid
 ```
 
-Se voce estiver usando VMs, verifique se o product_uuid e unico para cada node.
+Se voce copiou as VMs, verifique se o product_uuid e unico para cada VM.
 
 #### Verificando network adapters
 Se ter mais que 1 network adapter, o kubeadm pode escolher o errado. Para evitar isso, voce pode add IP route para o node, ou desativar o network adapter que nao sera usado.
