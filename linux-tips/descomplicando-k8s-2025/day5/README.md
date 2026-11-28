@@ -104,8 +104,7 @@ Essas portas devem estar abertas para que o cluster Kubernetes funcione corretam
 Por padrao, o Kubelet falha ao iniciar, se tiver swap no node e preciso desativar o swap. Para desativar o swap, voce pode usar o comando abaixo:
 
 ```bash
-sudo vim /etc/fstab
-# verificar: a linha Swap deve mostrar 0
+sudo sed '/swap/s/^/#/'  /etc/fstab
 # reboot
 sudo reboot
 # Apos reiniciar, verifique se o swap esta desativado
