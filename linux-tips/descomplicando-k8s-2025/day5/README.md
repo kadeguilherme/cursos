@@ -114,7 +114,8 @@ Comente a linha que contem swap, ou remova a linha salve e saia do editor
 
 ### Container Runtime
 Para rodar pods no Kubernetes, voce precisa de um container runtime.
-Por padrao, kubernetes usa o Container Runtime Interface (CRI) para se comunicar com o container runtime. O CRI e uma interface padrao que permite que o kubelet se comunique com diferentes container runtimes.
+Por padrão, kubernetes usa o Container Runtime Interface (CRI) para se comunicar com o container runtime. O CRI e uma interface padrao que permite que o kubelet se comunique com diferentes container runtimes.
+
 O CRI suporta varios container runtimes, como:
 - containerd: E um container runtime leve e de alto desempenho, que e usado por padrao pelo Kubernetes. Ele e recomendado para producao.
 - CRI-O: E um container runtime leve e de alto desempenho, que e usado por padrao pelo Kubernetes. Ele e recomendado para producao.
